@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "indian-ocean": "^0.4.0"
+    "d3": "^3.5.16",
+    "indian-ocean": "^0.4.0",
+    "lodash": "^4.9.0",
+    "queue-async": "^1.2.1",
+    "request": "^2.70.0"
   },
   "devDependencies": {},
   "scripts": {

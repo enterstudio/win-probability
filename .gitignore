@@ -28,3 +28,4 @@ raw-matches
 raw-matches-timeline
 raw/*.json
 paths/data/paths.csv
+raw/
