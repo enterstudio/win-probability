@@ -17,3 +17,14 @@ vignettes/*.pdf
 
 # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
 .httr-oauth
+
+
+
+
+config.json
+public/matches1.json
+node_modules
+raw-matches
+raw-matches-timeline
+raw/*.json
+paths/data/paths.csv
