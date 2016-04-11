@@ -1,0 +1,51 @@
+var io = require('indian-ocean')
+var _ = require('lodash')
+var d3 = require('d3')
+var request = require('request')
+var queue = require('queue-async')
+
+var q = queue(1)
+var rootDir = __dirname + '/../'
+var matchDir  = rootDir + '/raw/matches/'
+var publicDir = rootDir + '/public/data/'
+var config = io.readDataSync(rootDir + 'config.json')
+
+
+
+
+var frames = []
+io.readdirIncludeSync(matchDir, 'json').forEach(function(file, i){
+  var match = io.readDataSync(matchDir + file)
+
+  var firstWon = match.teams[0].winner
+
+  if (!match.timeline || !match.timeline.frames) return
+
+  match.timeline.frames.forEach(function(d, i){
+    var firstGold = 
+        d.participantFrames[1].totalGold
+      + d.participantFrames[2].totalGold
+      + d.participantFrames[3].totalGold
+      + d.participantFrames[4].totalGold
+      + d.participantFrames[5].totalGold
+
+    var secoundGold = 
+        d.participantFrames[6].totalGold
+      + d.participantFrames[7].totalGold
+      + d.participantFrames[8].totalGold
+      + d.participantFrames[9].totalGold
+      + d.participantFrames[10].totalGold
+    
+    var wGold =  firstWon ? firstGold : secoundGold
+    var lGold = !firstWon ? firstGold : secoundGold
+
+    frames.push({i: i, wGold: wGold, lGold: lGold})
+  })
+
+  process.stdout.write("parsing " + i + "\r");
+
+})
+
+
+
+io.writeDataSync(publicDir + 'frames.csv', frames)

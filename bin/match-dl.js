@@ -35,13 +35,14 @@ gameIds.forEach(function(id){
 
 
 function download(id, cb){
+  setTimeout(cb, 1250)
+
   var url = 'https://na.api.pvp.net/api/lol/na/v2.2/match/' 
     + id 
     + '?includeTimeline=true'
     + '&api_key=' + config.key
 
   request(url, function (err, res, body) {
-    setTimeout(cb, 1250)
     if (!err && res.statusCode == 200) {
       try{
         var path = matchDir + id + '.json'
@@ -55,27 +56,3 @@ function download(id, cb){
   })
 
 }
-
-
-
-// function downloadMatch(id, region, cb){
-//   var url = 'https://' + region.toLowerCase() + '.api.pvp.net/api/lol/' 
-//           + region.toLowerCase() + '/v2.2/match/' + id + '?includeTimeline=true&api_key=' + config.key
-
-//   request(url, function (err, res, body) {
-//     cb()
-//     if (!err && res.statusCode == 200) {
-//       console.log('count: ', count++, region, id)
-//       try{
-//         io.writeData('raw-matches-timeline/' + id + '.json', JSON.parse(body), noop)
-//       } catch (e){
-//         console.log(e, body)
-//       }
-//     } else{
-//       console.log(err ? err : res.statusCode, url)
-//     }
-//   })
-
-// }
-
-
